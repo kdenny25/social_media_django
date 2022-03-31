@@ -12,7 +12,17 @@
     <title>Dwitter</title>
 </head>
 <body>
-    <section class="hero is-small is-success mb-4">
+    <div class = "container">
+        <span class = "logo">
+            <figure class="media-left">
+                <p class="image is-64x64">
+                    {% load static %}
+                    <img src="{% static 'media/Data_Team_Logo_Small.png' %}">
+                </p>
+            </figure>
+        </span>
+    </div>
+    <section class="hero is-small is-success is-bold mb-4">
         <div class="hero-body">
             <h1 class="title is-1">Dwitter</h1>
             <p class="subtitle is-4">
