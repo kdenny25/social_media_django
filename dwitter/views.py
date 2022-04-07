@@ -1,12 +1,27 @@
 # dwitter/view.py
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import DweetForm
-from .models import Profile
+from .models import Profile, Dweet
 
 def dashboard(request):
-    form = DweetForm()
-    return render(request, "dwitter/dashboard.html", {"form": form})
+    form = DweetForm(request.POST or None)
+    if form.is_valid():
+        dweet = form.save(commit=False)
+        dweet.user = request.user
+        dweet.save()
+        # prevent resubmission when reloading the page
+        return redirect("dwitter:dashboard")
+
+    followed_dweets = Dweet.objects.filter(
+        user__profile__in=request.user.profile.follows.all()
+    ).order_by("-created_at")
+
+    return render(
+        request,
+        "dwitter/dashboard.html",
+        {"form": form, "dweets": followed_dweets},
+    )
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
