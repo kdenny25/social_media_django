@@ -31,13 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'dwitter',
-    'django.contrib.admin',
+
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dwitter',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -126,6 +127,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # social_media_django/settings.py
 
-LOGIN_REDIRECT_URL = "dashboard/"
-LOGOUT_REDIRECT_URL = "accounts/login"
+LOGIN_REDIRECT_URL = "/dashboard/"
+LOGOUT_REDIRECT_URL = "/accounts/login"
 
+# setup email hosting
+
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 1025
